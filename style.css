@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     color: gray;
+    font-family: "Mukta", sans-serif;
 }
 html,body{
     height: 100%;
@@ -38,12 +41,147 @@ html,body{
     height: 32%;
     width: 100%;
     border-radius: 9px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding-left: 20px;
 }
+.upar img{
+    width: 100px;
+}
+ 
+.upar i{
+    font-size: 23px;
+}
+.home,.search{
+    text-transform: uppercase;
+    display: flex;
+    gap: 20px;
+}
+.home i,.home h3{
+    color: white;
+}
+.home:hover,.search:hover{
+    cursor: pointer;
+}
+.home:hover h3{
+    text-decoration: underline;
+}
+
+.search:hover h3{
+    color: white;
+}
+.search:hover i{
+    color: white;
+}
+.search h3,i{
+    transition: all .3s;
+}
+
+
+
 .niche{
     height: 67%;
     width: 100%;
     border-radius: 9px;
+    position: relative;
 
+}
+
+.library{
+    height:50%;
+    margin: 8px;
+}
+
+.tit{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.leftTit{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.playlist{
+    overflow-y:scroll ;
+    height: 80%;
+    width: 100%;
+    background-color: pink;
+
+}
+.playlist::-webkit-scrollbar{
+    width: 10px;
+    background-color: rgb(64, 64, 64);
+}
+
+.playlist::-webkit-scrollbar-thumb{
+    background-color: black;
+    width: 5px;
+    border-radius: 20px;
+
+
+}
+
+.tit i{
+    font-size:30px ;
+}
+
+
+
+footer{
+    /* background-color: red; */
+    
+    padding-left: 10px;
+    /* position: absolute;
+    bottom: 50px; */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.allLinks{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center;
+}
+
+footer a{
+    font-size: small;
+    text-decoration: none;
+}
+.cookies{
+    font-weight: 900;
+    line-height: 30px;
+    width: auto;
+}
+
+.cookies:hover{
+    text-decoration: underline;
+}
+
+.english{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: solid 2px white;
+    width: 120px;
+    height:40px;
+    border-radius: 20px;
+}
+.english i{
+    font-size: 20px;
+    color: white;
+}
+.english h4{
+    color: white;
+}
+
+.english:hover{
+    scale: 1.1;
+    cursor: pointer;
 }
 
 
@@ -62,6 +200,9 @@ html,body{
     background-color: grey;
     z-index: 1;
 }
+
+
+
 
 
 nav{
@@ -112,6 +253,7 @@ nav .arrows .leftArrow,.rightArrow{
 .signup:hover{
     scale:1.1;
     cursor: pointer;
+    color: white;
 }
 .login:hover{
     scale:1.1;
