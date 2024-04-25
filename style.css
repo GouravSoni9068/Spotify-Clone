@@ -84,12 +84,12 @@ html,body{
     height: 67%;
     width: 100%;
     border-radius: 9px;
-    position: relative;
+    /* position: relative; */
 
 }
 
 .library{
-    height:50%;
+    height:55%;
     margin: 8px;
 }
 
@@ -104,11 +104,37 @@ html,body{
     align-items: center;
     gap: 10px;
 }
+/* {
+    transition: all 0.5s;
+} */
+
+.leftTit:hover{
+    cursor: pointer;
+}
+
+.leftTit:hover i{
+    color: white;
+}
+.leftTit:hover h2{
+    color: white;
+}
+
+.rightTit:hover i{
+    color: white;
+    cursor: pointer;
+}
+
+
+.tit i,.leftTit h2{
+    font-size:30px ;
+    transition: all ease 0.5s;
+}
+
 .playlist{
     overflow-y:scroll ;
     height: 80%;
     width: 100%;
-    background-color: pink;
+    background-color: rgb(64, 64, 64);
 
 }
 .playlist::-webkit-scrollbar{
@@ -120,12 +146,6 @@ html,body{
     background-color: black;
     width: 5px;
     border-radius: 20px;
-
-
-}
-
-.tit i{
-    font-size:30px ;
 }
 
 
@@ -134,8 +154,6 @@ footer{
     /* background-color: red; */
     
     padding-left: 10px;
-    /* position: absolute;
-    bottom: 50px; */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -200,6 +218,11 @@ footer a{
     background-color: grey;
     z-index: 1;
 }
+.right::-webkit-scrollbar-thumb{
+    width: 8px;
+    background-color: rgb(40, 40, 40);
+    border-radius: 30px;
+}
 
 
 
@@ -217,6 +240,7 @@ nav{
     align-items: center;
     justify-content: space-between;
     padding: 0px 3vw;
+    z-index: 99;
 }
 
 nav .arrows{
@@ -258,4 +282,80 @@ nav .arrows .leftArrow,.rightArrow{
 .login:hover{
     scale:1.1;
     cursor: pointer;
+}
+
+.cardContainer{
+    margin-top: 50px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card{
+    /* height: 20vw; */
+    padding: 10px;
+    width: 16vw;
+    /* background-color: brown; */
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 5px;
+    justify-content: center;
+    border-radius: 10px;
+    position: relative;
+    
+}
+
+.card:hover{
+    cursor: pointer;
+}
+.card:hover .playBtn{
+    top: 45%;
+    opacity: 1;
+}
+
+
+.card .playBtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.5vw;
+    width: 3.5vw;
+    background-color: #1FDD63;
+    padding-left: 3px;
+    border-radius: 50%;
+    position: absolute;
+    right: 7%;
+    top: 50%;
+    box-shadow: 8px 8px 20px black ;
+    opacity: 0;
+    transition: all ease .3s;
+}
+
+.card .playBtn:hover{
+    scale: 1.05;
+}
+
+.card i{
+    font-size: 30px;
+    color: black;
+    
+}
+
+
+.card img{
+    /* height: 70%; */
+    width: 100%;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+.card p{
+    text-align: center;
+    font-size: small;
+}
+.card h3{
+    color: white;
+}
+.card:hover{
+    background-color: rgb(33, 33, 33);
 }
