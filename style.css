@@ -47,19 +47,23 @@ html,body{
     padding-left: 20px;
 }
 .upar img{
-    width: 100px;
+    width: 8vw;
 }
  
 .upar i{
-    font-size: 23px;
+    font-size: 2vw;
 }
 .home,.search{
     text-transform: uppercase;
     display: flex;
-    gap: 20px;
+    align-items: center;
+    gap: 2vw;
 }
 .home i,.home h3{
     color: white;
+}
+.left .upar h3{
+    font-size: 1.4vw;
 }
 .home:hover,.search:hover{
     cursor: pointer;
@@ -126,7 +130,7 @@ html,body{
 
 
 .tit i,.leftTit h2{
-    font-size:30px ;
+    font-size:2vw ;
     transition: all ease 0.5s;
 }
 
@@ -161,12 +165,12 @@ footer{
 .allLinks{
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 1.7vw;
     align-items: center;
 }
 
 footer a{
-    font-size: small;
+    font-size: 1.1vw;
     text-decoration: none;
 }
 .cookies{
@@ -185,8 +189,8 @@ footer a{
     justify-content: center;
     gap: 5px;
     border: solid 2px white;
-    width: 120px;
-    height:40px;
+    width: 10vw;
+    height:3vw;
     border-radius: 20px;
 }
 .english i{
@@ -284,8 +288,14 @@ nav .arrows .leftArrow,.rightArrow{
     cursor: pointer;
 }
 
+
+.right h1{
+    margin-top: 20px;
+    color: white;
+    margin-left: 10px;
+
+}
 .cardContainer{
-    margin-top: 50px;
     display: flex;
     gap: 10px;
     flex-wrap: wrap;
@@ -337,7 +347,7 @@ nav .arrows .leftArrow,.rightArrow{
 }
 
 .card i{
-    font-size: 30px;
+    font-size: 2vw;
     color: black;
     
 }
@@ -351,11 +361,50 @@ nav .arrows .leftArrow,.rightArrow{
 }
 .card p{
     text-align: center;
-    font-size: small;
+    font-size: 1.2vw;
 }
 .card h3{
     color: white;
+    font-size: 1.8vw;
 }
 .card:hover{
     background-color: rgb(33, 33, 33);
+}
+
+
+
+
+.music-player{
+    height: 100px;
+    width: 100%;
+    background-color: rgb(19, 19, 19);
+    position: sticky;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.music-player .btns i{
+    font-size: 2vw;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(45, 45, 45);
+    border-radius: 50%;
+    box-shadow: 5px 5px 10px rgb(35, 35, 35);
+    color: white;
+    
+
 }
