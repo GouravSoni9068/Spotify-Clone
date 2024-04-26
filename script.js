@@ -43,10 +43,6 @@ function playAudio(track){
     audio.src=track;
     audio.play();
 }
-function pauseAudio(){
-    console.log("pause audio");
-    audio.pause();
-}
 
 async function main(){
     let SongCardContainer=document.querySelector(".song-cardContainer");
@@ -81,7 +77,10 @@ async function main(){
             </div>`
         });
 
+
     // PlAY SONGS
+        let music_player_PlayBtn =document.querySelector(".play");
+        console.log(music_player_PlayBtn)
         let allSongsCard=SongCardContainer.querySelectorAll(".songCard")
 
         allSongsCard.forEach(sCard => {
@@ -90,21 +89,50 @@ async function main(){
 
                 let songName=sCard.querySelector(".songname").innerHTML;
                 let songPlay=`${addressOfSOng}/songs/${songName}`;
-                
-                if(sCard.id=="pause")
-                {
-                    playAudio(songPlay);
-                    sCard.id="play";
-                }
-                else if(sCard.id=="play"){
+
+                playAudio(songPlay);  
+
+                let songInfo=document.querySelector(".songInfo");
+                songInfo.innerHTML=songName;
+
+                music_player_PlayBtn.innerHTML=`<i class="fa-solid fa-pause"></i>`
+
+                let songDuration=document.querySelector(".songTime");
+
+
+            // find song duration time
+                audio.addEventListener("loadeddata", () => {
+                    songDuration.innerHTML=Math.floor(audio.duration)+'sec';
                     
-                    pauseAudio();
-                    sCard.id="pause";
-                }    
+                  });
             })
+
         });
 
+        music_player_PlayBtn.addEventListener("click",()=>{
+            
+
+            if (audio.paused) {
+                if(audio.src=='')
+                {
+                    console.log("firstly played the song from playlist");
+                    
+                }
+                else
+                {
+                    music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                    audio.play();
+                }
+            } else {
+                music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+                audio.pause();
+            }
+        })
+
+
 }
+
+
 
 main();
 
