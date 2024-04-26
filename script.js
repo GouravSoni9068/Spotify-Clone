@@ -32,23 +32,42 @@ async function getSongs(){
         }
     }
     
-
     return songs;
-    
+
+}
+
+let audio = new Audio();
+
+
+function playAudio(track){
+    audio.src=track;
+    audio.play();
+}
+function pauseAudio(){
+    console.log("pause audio");
+    audio.pause();
 }
 
 async function main(){
     let SongCardContainer=document.querySelector(".song-cardContainer");
 
+   // Get all songs
     let all_songs=await getSongs();
-    console.log(all_songs);
+    let addressOfSOng;
 
+  // Show all the songs in the playlist
     all_songs.forEach(song => {
 
         let songName=song.split("/songs/")[1];
+        addressOfSOng=song.split("/songs/")[0];
+        
         SongCardContainer.innerHTML+=`
 
-            <div class="songCard">
+            <div id="pause" class="songCard">
+
+                <div class="musicImg">
+                    <i class="fa-solid fa-music"></i>
+                </div>
 
                 <div class="songDetail">
                     <div class="songname">${songName}</div>
@@ -62,13 +81,29 @@ async function main(){
             </div>`
         });
 
-        document.querySelector(".play").addEventListener("click",()=>{
-            console.log(all_songs);
-            
-            let audio = new Audio(all_songs[0]);
-            audio.play();
-        })
-        
+    // PlAY SONGS
+        let allSongsCard=SongCardContainer.querySelectorAll(".songCard")
+
+        allSongsCard.forEach(sCard => {
+
+            sCard.addEventListener("click",()=>{
+
+                let songName=sCard.querySelector(".songname").innerHTML;
+                let songPlay=`${addressOfSOng}/songs/${songName}`;
+                
+                if(sCard.id=="pause")
+                {
+                    playAudio(songPlay);
+                    sCard.id="play";
+                }
+                else if(sCard.id=="play"){
+                    
+                    pauseAudio();
+                    sCard.id="pause";
+                }    
+            })
+        });
+
 }
 
 main();
