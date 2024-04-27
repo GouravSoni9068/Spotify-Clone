@@ -11,6 +11,8 @@ gsap.to("nav",{
 
 
 
+// Fetch all songs and return
+
 async function getSongs(){
     let a=await fetch("http://127.0.0.1:3000/songs/")
 
@@ -36,12 +38,21 @@ async function getSongs(){
 
 }
 
+// for play audio
 let audio = new Audio();
-
-
 function playAudio(track){
     audio.src=track;
     audio.play();
+}
+
+// To convert min to sec
+function secondsToMinutes(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.floor(seconds % 60);
+    
+    // Add leading zero if seconds is less than 10
+    let formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+    return minutes + ":" + formattedSeconds;
 }
 
 async function main(){
@@ -92,46 +103,61 @@ async function main(){
 
                 playAudio(songPlay);  
 
-                let songInfo=document.querySelector(".songInfo");
-                songInfo.innerHTML=songName;
-
                 music_player_PlayBtn.innerHTML=`<i class="fa-solid fa-pause"></i>`
 
-                let songDuration=document.querySelector(".songTime");
-
-
-            // find song duration time
-                audio.addEventListener("loadeddata", () => {
-                    songDuration.innerHTML=Math.floor(audio.duration)+'sec';
-                    
-                  });
+                let songInfo=document.querySelector(".songInfo");
+                songInfo.innerHTML=songName;
+                let songTime=document.querySelector(".songTime");
+                songTime.innerHTML="00:00/00:00";
             })
 
         });
 
         music_player_PlayBtn.addEventListener("click",()=>{
-            
-
             if (audio.paused) {
+
+            // if 1st song play
                 if(audio.src=='')
                 {
-                    console.log("firstly played the song from playlist");
+                    playAudio(all_songs[0]);
+
+                    let songInfo=document.querySelector(".songInfo");
+                    songInfo.innerHTML=allSongsCard[0].querySelector(".songname").innerHTML;
+
+
+                    let songTime=document.querySelector(".songTime");
                     
                 }
                 else
-                {
-                    music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+                {   
                     audio.play();
                 }
-            } else {
+                music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+            }
+            else {
                 music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
                 audio.pause();
             }
         })
 
+        
+    audio.addEventListener("timeupdate",()=>{
+
+        let songTime=document.querySelector(".songTime");
+        songTime.innerHTML=`${secondsToMinutes(audio.currentTime)}/${secondsToMinutes(audio.duration)}`;
+
+        let circle=document.querySelector(".circle")
+        circle.style.left=`${(audio.currentTime / audio.duration) * 100}`+"%"
+        if(circle.style.left=="100%")
+        {
+            music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+            audio.pause();
+            circle.style.left="0%";
+        }
+        
+    })
 
 }
-
 
 
 main();

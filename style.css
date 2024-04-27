@@ -409,15 +409,53 @@ nav .arrows .leftArrow,.rightArrow{
     position: sticky;
     bottom: 0;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+    padding-bottom: 40px;
+
+}
+.seekbar{
+    height: 3px;
+    width: 98%;
+    border: solid 2px white;
+    border-radius: 2px;
+    position: absolute;
+    bottom: 30px;
+    display: flex;
     align-items: center;
 }
+.seekbar .circle
+{
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: relative;
+    background-color: pink;
+    transition: all 0.4s;
 
+}
+
+
+.music-player .songInfo{
+    
+    /* background-color: red; */
+    color: white;
+    font-weight: 700;
+    font-size: 18px;
+    width: 30%;
+}
+
+.music-player .songTime{
+    
+    /* background-color: green; */
+    width: 30%;
+    color: white;
+
+}
 
 .btns{
     display: flex;
     justify-content: center;
-    align-items: center;
     gap: 20px;
 }
 
@@ -433,8 +471,10 @@ nav .arrows .leftArrow,.rightArrow{
     border-radius: 50%;
     box-shadow: 5px 5px 10px rgb(35, 35, 35);
     color: white;
+}
+.music-player .btns div:hover{
+    cursor: pointer;
     
-
 }
 
 
