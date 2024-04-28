@@ -168,7 +168,7 @@ html,body{
 
 .musicImg i{
     color: white;
-    font-size: 30px;
+    font-size: 2.3vw;
 
 }
 
@@ -179,7 +179,7 @@ html,body{
     flex-direction: column;
 }
 .songname{
-    font-size: 17px;
+    font-size: 1.5vw;
     font-weight: 700;
     margin-bottom: -3px;
     line-height: 20px;
@@ -188,8 +188,8 @@ html,body{
 }
 
 .songCard .songCard-PlayBtn{
-    height: 40px;
-    width: 40px;
+    height: 3.5vw;
+    width: 3.5vw;
     background-color: rgb(79, 79, 79);
     display: flex;
     justify-content: center;
@@ -415,19 +415,22 @@ nav .arrows .leftArrow,.rightArrow{
 
 }
 .seekbar{
-    height: 3px;
+    height: 4px;
     width: 98%;
-    border: solid 2px white;
-    border-radius: 2px;
+    border: solid 4.5px white;
+    border-radius: 17px;
     position: absolute;
     bottom: 30px;
     display: flex;
     align-items: center;
 }
+.seekbar:hover{
+    cursor: pointer;
+}
 .seekbar .circle
 {
-    height: 10px;
-    width: 10px;
+    height: 15px;
+    width: 15px;
     border-radius: 50%;
     position: relative;
     background-color: pink;
