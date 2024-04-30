@@ -20,10 +20,8 @@ async function getSongs() {
     let div = document.createElement("div");
 
     div.innerHTML = response;
-    console.log(div);
 
     let as = div.getElementsByTagName("a");
-    console.log(as);
 
     let songs = [];
     for (let i = 0; i < as.length; i++) {
@@ -37,11 +35,22 @@ async function getSongs() {
 
 }
 
+let music_player_PlayBtn = document.querySelector(".play");
+
 // for play audio
 let audio = new Audio();
 function playAudio(track) {
+    
     audio.src = track;
     audio.play();
+    music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+    let songName = track.split("/songs/")[1];
+    let songInfo = document.querySelector(".songInfo");
+    songInfo.innerHTML = songName;
+
+    
+    
+    
 }
 
 // To convert min to sec
@@ -89,8 +98,6 @@ async function main() {
 
 
     // PlAY SONGS
-    let music_player_PlayBtn = document.querySelector(".play");
-    console.log(music_player_PlayBtn)
     let allSongsCard = SongCardContainer.querySelectorAll(".songCard")
 
     allSongsCard.forEach(sCard => {
@@ -101,13 +108,6 @@ async function main() {
             let songPlay = `${addressOfSOng}/songs/${songName}`;
 
             playAudio(songPlay);
-
-            music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`
-
-            let songInfo = document.querySelector(".songInfo");
-            songInfo.innerHTML = songName;
-            let songTime = document.querySelector(".songTime");
-            songTime.innerHTML = "00:00/00:00";
         })
 
     });
@@ -121,17 +121,12 @@ async function main() {
             if (audio.src == '') {
                 playAudio(all_songs[0]);
 
-                let songInfo = document.querySelector(".songInfo");
-                songInfo.innerHTML = allSongsCard[0].querySelector(".songname").innerHTML;
-
-
-                let songTime = document.querySelector(".songTime");
-
             }
             else {
                 audio.play();
             }
             music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+
         }
         else {
             music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
@@ -143,7 +138,7 @@ async function main() {
     audio.addEventListener("timeupdate", () => {
 
         let songTime = document.querySelector(".songTime");
-        songTime.innerHTML = `${secondsToMinutes(audio.currentTime)}/${secondsToMinutes(audio.duration)}`;
+        songTime.innerHTML = `${secondsToMinutes(audio.currentTime)} / ${secondsToMinutes(audio.duration)}`;
 
         circle.style.left = `${(audio.currentTime / audio.duration) * 100}` + "%"
         if (circle.style.left == "100%") {
@@ -159,9 +154,6 @@ async function main() {
     let circle = document.querySelector(".circle")
     let seekbar = document.querySelector(".seekbar");
     seekbar.addEventListener("click", (e) => {
-        console.log('click');
-
-        console.log(e.target.getBoundingClientRect().width, e.offsetX);
         circle.style.left=(e.offsetX/e.target.getBoundingClientRect().width)*100+'%';
         
         audio.currentTime=(e.offsetX/e.target.getBoundingClientRect().width)*audio.duration;
@@ -174,8 +166,45 @@ async function main() {
         document.querySelector(".left").style.left="-100%"
     })
 
+
+
+    // prev and Next btns
+
+    document.querySelector(".prev").addEventListener("click",()=>{
+        if(all_songs.indexOf(audio.src)==0)
+        {
+            playAudio(audio.src);
+        }
+        else if(all_songs.indexOf(audio.src)==-1)
+        {
+            playAudio(all_songs[0]);
+        }
+        else{
+            playAudio(all_songs[all_songs.indexOf(audio.src)-1]);
+            
+        }
+    })
+
+
+    document.querySelector(".next").addEventListener("click",()=>{
+        if(all_songs.indexOf(audio.src)==all_songs.length-1)
+        {
+            playAudio(audio.src);
+        }
+        else{
+            playAudio(all_songs[all_songs.indexOf(audio.src)+1]);
+            
+        }
+    })
+
+    music_player_PlayBtn.addEventListener("click",()=>{
+        let rightCardContainer=document.querySelector(".cardContainer")
+        let musicPlayer=document.querySelector(".music-player");
+        rightCardContainer.style.paddingBottom=musicPlayer.offsetHeight+"px";
+    })
+
 }
 
 
-main();
 
+main();

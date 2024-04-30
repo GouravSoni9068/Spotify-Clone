@@ -232,13 +232,13 @@ html,body{
 
 .playlist::-webkit-scrollbar{
     width: 10px;
-    background-color: rgb(64, 64, 64);
+    background-color: grey;
 }
 
 .playlist::-webkit-scrollbar-thumb{
-    background-color: rgb(12, 12, 12);
+    background-color: rgb(40, 40, 40);
     width: 5px;
-    border-radius: 20px;
+    border-radius: 4px;
 }
 
 
@@ -277,7 +277,7 @@ footer{
 .right::-webkit-scrollbar-thumb{
     width: 8px;
     background-color: rgb(40, 40, 40);
-    border-radius: 30px;
+    border-radius: 4px;
 }
 
 
@@ -447,6 +447,8 @@ nav .arrows .leftArrow,.rightArrow{
     justify-content: space-around;
     align-items: center;
     padding-bottom: 40px;
+    padding-right: 10px;
+    gap: 5px;
 
 }
 .seekbar{
@@ -455,7 +457,7 @@ nav .arrows .leftArrow,.rightArrow{
     border: solid 4.5px white;
     border-radius: 17px;
     position: absolute;
-    bottom: 30px;
+    bottom: 25px;
     display: flex;
     align-items: center;
 }
@@ -479,7 +481,7 @@ nav .arrows .leftArrow,.rightArrow{
     /* background-color: red; */
     color: white;
     font-weight: 700;
-    font-size: 1.5vw;
+    font-size: 20px;
     width: 32%;
 }
 
@@ -488,6 +490,7 @@ nav .arrows .leftArrow,.rightArrow{
     /* background-color: green; */
     width: 32%;
     color: white;
+    text-align: right;
 
 }
 
@@ -524,7 +527,7 @@ nav .arrows .leftArrow,.rightArrow{
         position: absolute;
         left: -100%; 
         z-index: 101;
-        transition: all ease 1s;
+        transition: all ease .4s;
         width: 60%;
         background-color: black;
     }
@@ -550,8 +553,13 @@ nav .arrows .leftArrow,.rightArrow{
         display: block;
     }
     .songInfo{
-        font-size: 3vw !important;
+        /* font-size: 3vw !important; */
+        width: auto;
+
     }
+    .songTime{
+        width: auto;
+    }   
   }
 
   @media (max-width: 550px) 
@@ -559,6 +567,22 @@ nav .arrows .leftArrow,.rightArrow{
     .cardContainer .card{
         width: 97%;
     }
+    .songInfo,.songTime{
+        /* font-size: 3vw !important; */
+        width: 100% !important;
+        text-align: center !important;
+
+    }
+    .music-player
+    {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: auto;
+    }
+
   }
 
 
