@@ -167,6 +167,13 @@ async function main() {
         audio.currentTime=(e.offsetX/e.target.getBoundingClientRect().width)*audio.duration;
     })
 
+    document.querySelector(".bars").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="0%"
+    })
+    document.querySelector(".x-mark").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="-100%"
+    })
+
 }
 
 
