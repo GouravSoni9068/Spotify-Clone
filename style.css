@@ -466,11 +466,11 @@ nav .arrows .leftArrow,.rightArrow{
 }
 .seekbar .circle
 {
-    height: 15px;
-    width: 15px;
+    height: 20px;
+    width: 20px;
     border-radius: 50%;
     position: relative;
-    background-color: pink;
+    background-color: white;
     transition: all 0.4s;
 
 }
@@ -484,15 +484,26 @@ nav .arrows .leftArrow,.rightArrow{
     font-size: 20px;
     width: 32%;
 }
-
-.music-player .songTime{
-    
-    /* background-color: green; */
+.right-songInfo{
     width: 32%;
-    color: white;
-    text-align: right;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    
 
 }
+.right-songInfo i{
+    color: white;
+    /* display: none; */
+    
+
+}
+
+.music-player .songTime{
+    color: white;
+
+}
+
 
 .btns{
     display: flex;
@@ -520,6 +531,30 @@ nav .arrows .leftArrow,.rightArrow{
     cursor: pointer;
     
 }
+
+.volume{
+    display: flex;
+    align-items: center;
+    padding-left: 35%;
+    gap: 2px;
+  }
+
+
+  #volume-seekbar{
+    display: none;
+    height: 6px;
+    width: 70px;
+    /* border: solid 2px white; */
+    /* border-radius: 10px; */
+  }
+  .volume:hover #volume-seekbar{
+    display: block;
+  }
+  #volume-stop{
+    display: none;
+  }
+
+
 
 
 @media (max-width: 960px) {
@@ -582,9 +617,12 @@ nav .arrows .leftArrow,.rightArrow{
         gap: 5px;
         height: auto;
     }
+    .volume{
+        padding-left:45px ;
+        /* justify-content: center; */
+    }
 
   }
-
 
 
 

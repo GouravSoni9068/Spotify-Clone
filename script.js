@@ -48,9 +48,6 @@ function playAudio(track) {
     let songInfo = document.querySelector(".songInfo");
     songInfo.innerHTML = songName;
 
-    
-    
-    
 }
 
 // To convert min to sec
@@ -120,10 +117,10 @@ async function main() {
             // if 1st song play
             if (audio.src == '') {
                 playAudio(all_songs[0]);
-
             }
             else {
                 audio.play();
+
             }
             music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
 
@@ -203,8 +200,23 @@ async function main() {
         rightCardContainer.style.paddingBottom=musicPlayer.offsetHeight+"px";
     })
 
+    // VOLUME
+
+    let volumeSeekbar=document.querySelector("#volume-seekbar");
+    volumeSeekbar.addEventListener("change",(e)=>{
+        
+        audio.volume=e.target.value/100;
+        if(audio.volume==0)
+        {
+            document.querySelector("#volumeBtn").style.display="none";
+            document.querySelector("#volume-stop").style.display="block";
+        }
+        else{
+            document.querySelector("#volume-stop").style.display="none";
+            document.querySelector("#volumeBtn").style.display="block";
+        }
+        
+    })
 }
-
-
 
 main();
