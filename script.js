@@ -10,11 +10,38 @@ gsap.to("nav", {
 })
 
 
+let music_player_PlayBtn = document.querySelector(".play");
+
+// for play audio
+let audio = new Audio();
+
+function playAudio(track) {
+    audio.src = track;
+    audio.play();
+    music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
+    let songName = track.split(`/songs/${folder}/`)[1].split(".mp3")[0];
+    let songInfo = document.querySelector(".songInfo");
+    songInfo.innerHTML = songName;
+
+}
+
+// To convert min to sec
+function secondsToMinutes(seconds) {
+    let minutes = Math.floor(seconds / 60);
+    let remainingSeconds = Math.floor(seconds % 60);
+
+    // Add leading zero if seconds is less than 10
+    let formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
+    return minutes + ":" + formattedSeconds;
+}
+let folder;
 
 // Fetch all songs and return
 
-async function getSongs() {
-    let a = await fetch("http://127.0.0.1:3000/songs/")
+async function getSongs(folder) {
+    let a = await fetch(`http://127.0.0.1:3000/songs/${folder}`)
+    // console.log(a);
+    
 
     let response = await a.text();
     let div = document.createElement("div");
@@ -34,80 +61,128 @@ async function getSongs() {
     return songs;
 
 }
+let all_songs;
 
-let music_player_PlayBtn = document.querySelector(".play");
+async function displayAlbum()
+{
+    let album=await fetch("http://127.0.0.1:3000/songs/")
+    let response = await album.text();
+    let div = document.createElement("div");
 
-// for play audio
-let audio = new Audio();
-function playAudio(track) {
+    div.innerHTML = response;
+    console.log(div);
+    let as=div.querySelectorAll("a");
+    as.forEach(async a => {
+        // console.log(a);
+        if(a.href.includes("/songs/"))
+        {
+            let folder=(a.href.split('/').slice(-2)[0]);
+            console.log(folder);
+            
+            let album=await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
+            let response = await album.json();
+            console.log(response);
+            document.querySelector(".cardContainer").innerHTML+=
+            `<div class="card">
+                <img src="songs/${folder}/img.jpeg" alt="">
+                <h3>${response.title}</h3>
+                <p>${response.discription}</p>
+                <div class="playBtn">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+            </div>`
+            
+            
+        }
+    });
     
-    audio.src = track;
-    audio.play();
-    music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
-    let songName = track.split("/songs/")[1];
-    let songInfo = document.querySelector(".songInfo");
-    songInfo.innerHTML = songName;
+    
 
+    // let as = div.getElementsByTagName("a");
+    // console.log(as);
 }
 
-// To convert min to sec
-function secondsToMinutes(seconds) {
-    let minutes = Math.floor(seconds / 60);
-    let remainingSeconds = Math.floor(seconds % 60);
-
-    // Add leading zero if seconds is less than 10
-    let formattedSeconds = remainingSeconds < 10 ? "0" + remainingSeconds : remainingSeconds;
-    return minutes + ":" + formattedSeconds;
-}
 
 async function main() {
     let SongCardContainer = document.querySelector(".song-cardContainer");
 
     // Get all songs
-    let all_songs = await getSongs();
-    let addressOfSOng;
+    let index;
+    let right_cards=document.querySelectorAll(".card")
+    let right_cards_array=Array.from(right_cards);
 
-    // Show all the songs in the playlist
-    all_songs.forEach(song => {
 
-        let songName = song.split("/songs/")[1];
-        addressOfSOng = song.split("/songs/")[0];
+    // Display Album
 
-        SongCardContainer.innerHTML += `
+    await displayAlbum();
+    
+    right_cards_array.forEach(rCard=>{
+        
+        
+        rCard.addEventListener("click",async ()=>{
 
-            <div id="pause" class="songCard">
+            SongCardContainer.innerHTML='';
 
-                <div class="musicImg">
-                    <i class="fa-solid fa-music"></i>
-                </div>
+            index=right_cards_array.indexOf(rCard);
+            console.log(index);
+            folder=`song${index+1}`;
+            // folder="HaryanviSong";
 
-                <div class="songDetail">
-                    <div class="songname">${songName}</div>
-                    <div class="artist">Lorem, ipsum.</div>
-                </div>
-                
-                <div class="songCard-PlayBtn">
-                    <i class="fa-solid fa-play"></i>
-                </div>
+            all_songs = await getSongs(folder);
+            console.log(all_songs);
             
-            </div>`
-    });
+            let addressOfSOng;
+            
+        
+            // Show all the songs in the playlist
+            
+            all_songs.forEach(song => {
+        
+                let songName = song.split(`/songs/${folder}/`)[1].split(".mp3")[0];
+                console.log(songName);
+                
+                addressOfSOng = song.split(`/songs/${folder}/`)[0];
+                SongCardContainer.innerHTML += `
+        
+                    <div id="pause" class="songCard">
+        
+                        <div class="musicImg">
+                            <i class="fa-solid fa-music"></i>
+                        </div>
+        
+                        <div class="songDetail">
+                            <div class="songname">${songName}</div>
+                            <div class="artist">Gourav Soni</div>
+                        </div>
+                        
+                        <div class="songCard-PlayBtn">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                    
+                    </div>`
+            });
+            let allSongsCard = SongCardContainer.querySelectorAll(".songCard")
+            console.log(allSongsCard);
+            
 
+            allSongsCard.forEach(sCard => {
 
-    // PlAY SONGS
-    let allSongsCard = SongCardContainer.querySelectorAll(".songCard")
+                sCard.addEventListener("click", () => {
+                    console.log('Click');
+                    
 
-    allSongsCard.forEach(sCard => {
+                    let songName = sCard.querySelector(".songname").innerHTML;
+                    let songPlay = `${addressOfSOng}/songs/${folder}/${songName}.mp3`;
+                    audio.pause();
+                    
+                    playAudio(songPlay);
+                })
 
-        sCard.addEventListener("click", () => {
-
-            let songName = sCard.querySelector(".songname").innerHTML;
-            let songPlay = `${addressOfSOng}/songs/${songName}`;
-
-            playAudio(songPlay);
+            });
         })
-
-    });
+    })
+    // PlAY SONGS
+    
 
     // CLICK ON MUSIC PLAYER
 
@@ -116,18 +191,25 @@ async function main() {
 
             // if 1st song play
             if (audio.src == '') {
+                // audio.pause();
                 playAudio(all_songs[0]);
+                // console.log(audio.src);
             }
             else {
+                
+                
                 audio.play();
+                music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
 
             }
-            music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
 
         }
         else {
-            music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+            console.log(audio);
+            
             audio.pause();
+            music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-play"></i>`;
+            console.log(audio.src);
         }
     })
 
@@ -188,9 +270,12 @@ async function main() {
         {
             playAudio(audio.src);
         }
+        else if(all_songs.indexOf(audio.src)==-1)
+        {
+            playAudio(all_songs[0]);
+        }
         else{
             playAudio(all_songs[all_songs.indexOf(audio.src)+1]);
-            
         }
     })
 

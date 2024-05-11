@@ -367,7 +367,7 @@ nav .arrows .leftArrow,.rightArrow{
 }
 
 .card{
-    /* height: 20vw; */
+    height:333.333px;
     padding: 10px;
     width: 210px;
     /* background-color: brown; */
@@ -375,7 +375,7 @@ nav .arrows .leftArrow,.rightArrow{
     flex-direction: column;
     /* align-items: center; */
     gap: 6px;
-    justify-content: center;
+    /* justify-content: center; */
     border-radius: 10px;
     position: relative;
     
@@ -419,6 +419,7 @@ nav .arrows .leftArrow,.rightArrow{
 
 
 .card img{
+    height: 190px;
     /* height: 70%; */
     width: 100%;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
@@ -537,22 +538,18 @@ nav .arrows .leftArrow,.rightArrow{
     align-items: center;
     padding-left: 35%;
     gap: 2px;
-  }
+}
 
 
-  #volume-seekbar{
-    display: none;
+#volume-seekbar{
+    filter: invert(1);
     height: 6px;
     width: 70px;
-    /* border: solid 2px white; */
-    /* border-radius: 10px; */
-  }
-  .volume:hover #volume-seekbar{
-    display: block;
-  }
-  #volume-stop{
+}
+
+#volume-stop{
     display: none;
-  }
+}
 
 
 
@@ -600,7 +597,7 @@ nav .arrows .leftArrow,.rightArrow{
   @media (max-width: 550px) 
   {
     .cardContainer .card{
-        width: 97%;
+        width: 80%;
     }
     .songInfo,.songTime{
         /* font-size: 3vw !important; */
@@ -614,11 +611,11 @@ nav .arrows .leftArrow,.rightArrow{
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 5px;
+        gap: 10px;
         height: auto;
     }
     .volume{
-        padding-left:45px ;
+        padding-left:18px ;
         /* justify-content: center; */
     }
 
