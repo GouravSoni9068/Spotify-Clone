@@ -551,6 +551,13 @@ nav .arrows .leftArrow,.rightArrow{
     display: none;
 }
 
+#volume-stop:hover{
+    cursor:pointer;
+}
+#volumeBtn:hover{
+    cursor:pointer;
+}
+
 
 
 
