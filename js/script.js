@@ -40,7 +40,7 @@ let folder;
 // Fetch all songs and return
 
 async function getSongs(folder) {
-    let a = await fetch(`http://127.0.0.1:3000/songs/${folder}`)
+    let a = await fetch(`/songs/${folder}`)
     // console.log(a);
 
 
@@ -66,7 +66,7 @@ async function getSongs(folder) {
 let all_songs;
 
 async function displayAlbum() {
-    let album = await fetch("http://127.0.0.1:3000/songs/")
+    let album = await fetch("/songs/")
     let response = await album.text();
     // console.log("response: ",response);
     
@@ -85,7 +85,7 @@ async function displayAlbum() {
             // console.log(folder);
             
 
-            let album = await fetch(`http://127.0.0.1:3000/songs/${folder}/info.json`)
+            let album = await fetch(`/songs/${folder}/info.json`)
             let response = await album.json();
             // console.log(response);
             document.querySelector(".cardContainer").innerHTML +=
