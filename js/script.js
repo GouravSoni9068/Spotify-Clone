@@ -86,7 +86,7 @@ async function displayAlbum() {
             // console.log(folder);
             
 
-            let album = await fetch(`/songs/${folder}/info.json`)
+            let album = await fetch(`${baseUrl}/songs/${folder}/info.json`)
             let response = await album.json();
             // console.log(response);
             document.querySelector(".cardContainer").innerHTML +=
