@@ -15,12 +15,12 @@ let music_player_PlayBtn = document.querySelector(".play");
 
 // for play audio
 let audio = new Audio();
-
+let baseUrl = window.location.origin;
 function playAudio(track) {
     audio.src = track;
     audio.play();
     music_player_PlayBtn.innerHTML = `<i class="fa-solid fa-pause"></i>`;
-    let songName = track.split(`/songs/${folder}/`)[1].split(".mp3")[0];
+    let songName = track.split(`${baseUrl}/songs/${folder}/`)[1].split(".mp3")[0];
     let songInfo = document.querySelector(".songInfo");
     songInfo.innerHTML = songName.replaceAll("%20", " ");
 
@@ -36,7 +36,7 @@ function secondsToMinutes(seconds) {
     return minutes + ":" + formattedSeconds;
 }
 let folder;
-let baseUrl = window.location.origin;
+
 
 // Fetch all songs and return
 
