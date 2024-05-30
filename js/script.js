@@ -15,7 +15,7 @@ let music_player_PlayBtn = document.querySelector(".play");
 
 // for play audio
 let audio = new Audio();
-
+// let baseUrl = window.location.origin;
 function playAudio(track) {
     audio.src = track;
     audio.play();
@@ -36,6 +36,7 @@ function secondsToMinutes(seconds) {
     return minutes + ":" + formattedSeconds;
 }
 let folder;
+let baseUrl = window.location.origin;
 
 // Fetch all songs and return
 
