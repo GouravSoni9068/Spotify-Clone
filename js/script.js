@@ -91,7 +91,7 @@ async function displayAlbum() {
             // console.log(response);
             document.querySelector(".cardContainer").innerHTML +=
                 `<div class="card">
-                <img src="songs/${folder}/cover.webp" alt="">
+                <img src="songs/${folder}/cover.jpg" alt="">
                 <h3>${response.title}</h3>
                 <p>${response.discription}</p>
                 <div class="playBtn">
