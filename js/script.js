@@ -36,12 +36,12 @@ function secondsToMinutes(seconds) {
     return minutes + ":" + formattedSeconds;
 }
 let folder;
-let baseUrl = window.location.origin;
 
 // Fetch all songs and return
+let baseUrl = window.location.origin;
 
 async function getSongs(folder) {
-    let a = await fetch(`/songs/${folder}`)
+    let a = await fetch(`${baseUrl}/songs/${folder}`)
     // console.log(a);
 
 
@@ -67,7 +67,7 @@ async function getSongs(folder) {
 let all_songs;
 
 async function displayAlbum() {
-    let album = await fetch("/songs/")
+    let album = await fetch(`${baseUrl}/songs/`)
     let response = await album.text();
     // console.log("response: ",response);
     
