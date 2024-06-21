@@ -41,8 +41,8 @@ let folder;
 let baseUrl = window.location.origin;
 
 async function getSongs(folder) {
-    let a = await fetch(`${baseUrl}/songs/${folder}`)
-    // console.log(a);
+    let a = await fetch(`/songs/${folder}`)
+    // console.log(a); 
 
 
 
@@ -67,7 +67,7 @@ async function getSongs(folder) {
 let all_songs;
 
 async function displayAlbum() {
-    let album = await fetch(`${baseUrl}/songs/`)
+    let album = await fetch(`/songs/`)
     let response = await album.text();
     // console.log("response: ",response);
     
@@ -80,13 +80,13 @@ async function displayAlbum() {
     
     for (const a of as) {
         // console.log(a.href);
-        if (a.href.includes("/songs/")) {
+        if (a.href.includes("/songs/") && !a.href.includes(".htaccess")) {
             let folder = (a.href.split('/').slice(-2)[0]);
 
             // console.log(folder);
             
 
-            let album = await fetch(`${baseUrl}/songs/${folder}/info.json`)
+            let album = await fetch(`/songs/${folder}/info.json`)
             let response = await album.json();
             // console.log(response);
             document.querySelector(".cardContainer").innerHTML +=
